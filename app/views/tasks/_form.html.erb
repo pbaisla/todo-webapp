@@ -1,32 +1,50 @@
-<%= form_for(task) do |f| %>
-  <% if task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+<%= form_for @task, :html => { :class => "form-horizontal task" } do |f| %>
 
-      <ul>
-      <% task.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <% if @task.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @task.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_area :title %>
+  <div class="form-group">
+    <%= f.label :title, :class => 'control-label col-lg-2' %>
+    <div class="col-md-4">
+      <%= f.text_field :title, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:title) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :task_date, :class => 'control-label col-lg-2' %>
+    <div class="col-md-4">
+      <%= f.date_select :task_date, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:task_date) %>
   </div>
 
-  <div class="field">
-    <%= f.label :task_date %>
-    <%= f.date_select :task_date %>
+  <div class="form-group">
+
+    <%= f.label :status, :class => 'control-label col-lg-2' %>
+    <div class="col-md-4">
+      <%= f.select :status, Task.statuses.map { |key, value| [key.humanize, key] }, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:status) %>
   </div>
 
-  <div class="field">
-    <%= f.label :status %>
-    <%= f.select :status, Task.statuses.map { |key, value| [key.humanize, key] } %>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-md-4">
+      <%= f.submit nil, :class => 'btn btn-success' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                tasks_path, :class => 'btn btn-danger' %>
+    </div>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>
