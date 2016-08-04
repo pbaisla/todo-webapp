@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160803132007) do
+ActiveRecord::Schema.define(version: 20160804135733) do
 
   create_table "tasks", force: :cascade do |t|
     t.text     "title"
     t.date     "task_date"
-    t.text     "status"
+    t.integer  "status",     default: 0
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
