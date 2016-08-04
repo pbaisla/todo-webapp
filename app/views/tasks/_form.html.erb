@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= f.label :status %>
-    <%= f.text_area :status %>
+    <%= f.select :status, Task.statuses.map { |key, value| [key.humanize, key] } %>
   </div>
 
   <div class="actions">
