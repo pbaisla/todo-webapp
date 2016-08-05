@@ -10,8 +10,6 @@
   <dd><%= @task.task_date %></dd>
   <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
   <dd><%= @task.status %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
-  <dd><%= @task.user_id %></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
